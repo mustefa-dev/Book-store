@@ -1,0 +1,25 @@
+info:
+  contact: {}
+paths:
+  /example/DeleteBook:
+    delete:
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+  /example/FindBook:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+  /example/UpdateBook:
+    patch:
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+swagger: "2.0"
