@@ -1,6 +1,13 @@
 info:
   contact: {}
 paths:
+  /example/CreateBook:
+    post:
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
   /example/DeleteBook:
     delete:
       responses:
@@ -9,6 +16,13 @@ paths:
           schema:
             type: string
   /example/FindBook:
+    get:
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+  /example/FindBooks:
     get:
       responses:
         "200":

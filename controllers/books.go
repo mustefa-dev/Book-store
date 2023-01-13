@@ -16,10 +16,20 @@ type CreateBookInput struct {
 	Author string `json:"author" binding:"required"`
 }
 
-// GET /books
-// Find all books
-// @Success 200 {string} FindBooks
-// @Router /example/FindBooks [get]
+func FindBooksByAuthorAndTitle(c *gin.Context) {
+	var books []models.Book
+	author := c.Query("author")
+	title := c.Query("title")
+	query := models.DB.Table("books")
+	if title != "" {
+		query = query.Where("title LIKE ?", title+"%")
+	}
+	if author != "" {
+		query = query.Where("author = ?", author)
+	}
+	query.Find(&books)
+	c.JSON(http.StatusOK, gin.H{"data": books})
+}
 
 func FindBooks(c *gin.Context) {
 	var books []models.Book
@@ -28,21 +38,14 @@ func FindBooks(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": books})
 }
 
-// GET /books/:id
-// Find a book
-// @Success 200 {string} FindBook
-// @Router /example/FindBook [get]
 func FindBook(c *gin.Context) {
 	// Get model if exist
-	var book models.Book
-	models.DB.Where("id = ?", c.Param("id")).First(&book)
-
-	c.JSON(http.StatusOK, gin.H{"data": book})
+	startsWith := c.Query("startsWith")
+	var books []models.Book
+	models.DB.Where("title LIKE ?", startsWith+"T%").Find(&books)
+	c.JSON(http.StatusOK, gin.H{"data": books})
 }
 
-// POST /books
-// Create new book
-// @Success 200 {string} CreateBook
 func CreateBook(c *gin.Context) {
 	// Validate input
 	var input CreateBookInput
@@ -54,12 +57,6 @@ func CreateBook(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": book})
 }
 
-// @Router /example/CreateBook [post]
-
-// PATCH /books/:id
-// Update a book
-// @Success 200 {string} UpdateBook
-// @Router /example/UpdateBook [patch]
 func UpdateBook(c *gin.Context) {
 	// Get model if exist
 	var book models.Book
@@ -74,10 +71,6 @@ func UpdateBook(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": book})
 }
 
-// DELETE /books/:id
-// Delete a book
-// @Success 200 {string} DeleteBook
-// @Router /example/DeleteBook [delete]
 func DeleteBook(c *gin.Context) {
 	// Get model if exist
 	var book models.Book

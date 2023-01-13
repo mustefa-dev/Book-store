@@ -16,6 +16,18 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/example/CreateBook": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/example/DeleteBook": {
             "delete": {
                 "responses": {
@@ -29,6 +41,18 @@ const docTemplate = `{
             }
         },
         "/example/FindBook": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/example/FindBooks": {
             "get": {
                 "responses": {
                     "200": {
