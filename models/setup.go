@@ -15,9 +15,4 @@ func ConnectDatabase() {
 	database.AutoMigrate(&Book{})
 	DB = database
 
-	//database, _ := gorm.Open("sqlite3", "aa.db")
-	//database.AutoMigrate(&Book{})
-	//DB = database
 }
-
-//ENV Variable
