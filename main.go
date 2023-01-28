@@ -16,7 +16,6 @@ func main() {
 
 	// Routes
 	r.GET("/findBooks", ErrorHandler(), controllers.FindBooks)
-	r.GET("/findBook/:id", ErrorHandler(), controllers.FindBook)
 	r.GET("/books/filter", ErrorHandler(), controllers.FindBooksByAuthorAndTitle)
 	r.POST("/createBook", ErrorHandler(), controllers.CreateBook)
 	r.POST("/UpdateBook/:id", ErrorHandler(), controllers.UpdateBook)

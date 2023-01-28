@@ -38,14 +38,6 @@ func FindBooks(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": books})
 }
 
-func FindBook(c *gin.Context) {
-	// Get model if exist
-	startsWith := c.Query("startsWith")
-	var books []models.Book
-	models.DB.Where("title LIKE ?", startsWith+"T%").Find(&books)
-	c.JSON(http.StatusOK, gin.H{"data": books})
-}
-
 func CreateBook(c *gin.Context) {
 	// Validate input
 	var input CreateBookInput
